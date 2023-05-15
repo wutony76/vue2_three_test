@@ -81,9 +81,17 @@ export default {
           )
           //调整纹理图的方向
           explosionTexture.flipY = false
+          let textureNormal = new Three.TextureLoader().load(
+            '/free_merc_hovercar/textures/Material.001_clearcoat_normal.png'
+          )
+
+
           //将纹理图生成基础网格材质(MeshBasicMaterial)
-          const material = new Three.MeshBasicMaterial({
-            map: explosionTexture,
+          // const material = new Three.MeshBasicMaterial({
+          const material = new Three.MeshPhongMaterial({
+            map: explosionTexture, // 普通顏色紋理貼圖
+            normalMap: textureNormal, // 法線貼圖 
+            normalScale: new Three.Vector2(1.2, 5) //深淺值 
           })
           //给模型每部分上材质
           o.material = material
