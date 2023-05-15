@@ -1,0 +1,47 @@
+Base 230411 save
+
+Vue base proj 專案建置
+npm install eslint -g	
+npm install eslint --save
+eslint --init
+
+
+vue add router                      << 專案引入 router
+
+
+不只懂Vue 語法：什麼是slot？請示範slot 的用法？
+vue.config.js 的完整配置（超详细）！ - 掘金
+
+
+npm i element-ui -S
+
+vue公共页面布局layout - 尼古拉斯-富贵 - 博客园
+
+npm install webpack webpack-cli --save-dev
+
+
+Cannot GET 錯誤
+vue.config.js
+
+publicPath: '/'		// 需將點移除
+
+
+npm install css-loader style-loader --save-dev
+npm install sass-loader node-sass --save-dev
+
+
+npm i qiankun -S
+
+
+require.context 使用方式
+使用require.context实现前端工程自动化- 简书	
+1. resolve {Function} -接受一个参数request,request为test文件夹下面匹配文件的相对路径,返  回这个匹配文件相对于整个工程的相对路径
+2. keys {Function} -返回匹配成功模块的名字组成的数组
+3. id {String} -执行环境的id,返回的是一个字符串,主要用在module.hot.accept,应该是热加载?
+
+
+Vuex 
+npm uninstall vuex
+npm install vuex@next --save
+npm install vuex@3 --save      -vue2
+
