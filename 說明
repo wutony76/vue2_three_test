@@ -1,47 +1,51 @@
-Base 230411 save
-
-Vue base proj 專案建置
-npm install eslint -g	
-npm install eslint --save
-eslint --init
+npm install --save three
 
 
-vue add router                      << 專案引入 router
+// 創建畫佈
+PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )具有四个参数:
+fov — 摄像机视锥体垂直视野角度。可以理解为人类的视野广度。
+aspect — 摄像机视锥体横纵比。渲染结果的横向尺寸和纵向尺寸的比值，这里我们使用的是 浏览器窗口的宽高比。
+near — 摄像机视锥体近端面。一切比近面更近的事物将不被渲染。
+far — 摄像机视锥体远端面。一切比远面更远的事物将不被渲染，但是设置过大可能会影响性能
+
+const canvas = document.querySelector('#three')
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
 
 
-不只懂Vue 語法：什麼是slot？請示範slot 的用法？
-vue.config.js 的完整配置（超详细）！ - 掘金
+// 場景
+const scene = new THREE.Scene()
 
 
-npm i element-ui -S
-
-vue公共页面布局layout - 尼古拉斯-富贵 - 博客园
-
-npm install webpack webpack-cli --save-dev
+// 創建Group
+const group = new THREE.Group()
 
 
-Cannot GET 錯誤
-vue.config.js
-
-publicPath: '/'		// 需將點移除
-
-
-npm install css-loader style-loader --save-dev
-npm install sass-loader node-sass --save-dev
-
-
-npm i qiankun -S
-
-
-require.context 使用方式
-使用require.context实现前端工程自动化- 简书	
-1. resolve {Function} -接受一个参数request,request为test文件夹下面匹配文件的相对路径,返  回这个匹配文件相对于整个工程的相对路径
-2. keys {Function} -返回匹配成功模块的名字组成的数组
-3. id {String} -执行环境的id,返回的是一个字符串,主要用在module.hot.accept,应该是热加载?
-
-
-Vuex 
-npm uninstall vuex
-npm install vuex@next --save
-npm install vuex@3 --save      -vue2
-
+// 載入模型
+const gltfLoader = new GLTFLoader()
+gltfLoader.load('free_merc_hovercar/scene.gltf', (gltf) => {
+  console.log('載入模型 gltf >>>', gltf)
+  model = gltf.scene
+  console.log('載入模型 gltf.model >>>', model)
+  model.traverse((o) => {
+    //将图片作为纹理加载
+    let explosionTexture = new Three.TextureLoader().load(
+      '/free_merc_hovercar/textures/Material.001_baseColor.jpeg'
+      // '/free_merc_hovercar/textures/Plane_0_baseColor.png'
+    )
+    //调整纹理图的方向
+    explosionTexture.flipY = false
+    //将纹理图生成基础网格材质(MeshBasicMaterial)
+    const material = new Three.MeshBasicMaterial({
+      map: explosionTexture,
+    })
+    //给模型每部分上材质
+    o.material = material
+    //加这句，让模型等每个部分都能产生阴影
+    if (o.isMesh) {
+      o.castShadow = true
+      o.receiveShadow = true
+    }
+  })
+  // scene.add(model)
+  group.add(model)
+})
