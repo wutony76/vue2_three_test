@@ -13,6 +13,12 @@
       <i class="el-icon-eleme"></i>
       <span slot="title">INDEX</span>
     </el-menu-item>
+
+    <el-menu-item index="/test">
+      <i class="el-icon-eleme"></i>
+      <span slot="title">TEST</span>
+    </el-menu-item>
+
     <el-menu-item index="/icons">
       <i class="el-icon-menu"></i>
       <span slot="title">ICONS</span>

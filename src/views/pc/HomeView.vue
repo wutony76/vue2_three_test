@@ -50,9 +50,10 @@ import * as Three from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls' 
 
+import defMulitConf from '@/config/MultipleTreeConf'
 import { DrawCanvas } from '@/logic/TreeGltfClass.js'
-import { TYPE as MatType, DESC as MatDesc } from '@/logic/TreeMatClass.js'
-import { TYPE as LightType, DESC as LightDesc } from '@/logic/TreeLightClass.js'
+// import { TYPE as MatType, DESC as MatDesc } from '@/logic/TreeMatClass.js'
+// import { TYPE as LightType, DESC as LightDesc } from '@/logic/TreeLightClass.js'
 
 
 
@@ -79,20 +80,7 @@ export default {
 
   methods: {
     initCanvas () {
-      const DefThreeConf = [
-        { desc_mat: MatDesc.BASIC, desc_light: LightDesc.NONE,
-          Light: { type: LightType.NONE, }, 
-        },
-        { desc_mat: MatDesc.LAMBERT, desc_light: LightDesc.SPOT,
-          Mat: { type: MatType.LAMBERT},
-          Light: { type: LightType.SPOT, }, 
-        },
-        { desc_mat: MatDesc.LAMBERT, desc_light: LightDesc.SPOT,
-          Mat: { type: MatType.LAMBERT, color: 0xFF00ff, },
-          Light: { type: LightType.SPOT, }, 
-        },
-      ]
-
+      const DefThreeConf = defMulitConf 
       Array.prototype.forEach.call(this.$refs.homeMain.children, (childs) => {
         Array.prototype.forEach.call(childs.children, (child, index) => {
           const getCanvasId = `#${child.children[0].id}`
@@ -152,8 +140,10 @@ export default {
       const res = await drawCanvas.init()
       setTimeout(() => {
         console.log('>>>>>>>', Object.keys(res.model).length, res)
-        if (args && Object.keys(res.model).length > 0){
+        if (args && Object.keys(res.model).length > 0) {
+          // 如果有設定Light，場景加入燈
           if (Object.prototype.hasOwnProperty.call(args, 'Light')) drawCanvas._addLight()
+          // 如果有設定Mat，物件重新改材質
           if (Object.prototype.hasOwnProperty.call(args, 'Mat')) drawCanvas.updateModelMat()
         }
       }, 500)

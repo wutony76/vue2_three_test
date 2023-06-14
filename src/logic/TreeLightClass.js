@@ -1,9 +1,9 @@
 import * as Three from 'three'
 export const TYPE = {
-  NONE: 'None',
   SPOT: 'SpotLight',
 }
 export const DESC = {
+  NONE: 'None',
   SPOT: 'SpotLight',
 }
 

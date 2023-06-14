@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 import Layout2 from '@/layout/layout2.vue'
 import JumpHomeView from '@/views/JumpHomePage.vue'
+import JumpTest from '@/views/JumpTest.vue'
+
 import vGoods from 'views/goods'
 import vAbout from 'views/about'
 import vIcons from 'views/icons'
@@ -36,6 +38,11 @@ const baseRoutes = [
         path: 'goods',
         name: 'goods',
         component: vGoods
+      },
+      {
+        path: 'test',
+        name: 'test',
+        component: JumpTest
       },
     ]
   }
